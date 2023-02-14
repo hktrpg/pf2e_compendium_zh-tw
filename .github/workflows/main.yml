@@ -31,27 +31,21 @@ jobs:
       - name: unzip all data
         run: |
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}
-          chmod 777 ./.github/${{ steps.read_version.outputs.version }}
+          mkdir -p ./.github/${{ steps.read_version.outputs.version }}/npc
+          mkdir -p ./.github/${{ steps.read_version.outputs.version }}/compendium/
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}-old
           unzip ./.github/pf2e_compendium_chn.zip -d ./.github/${{ steps.read_version.outputs.version }}-old
           rm ./.github/${{ steps.read_version.outputs.version }}-old/babele.js
 
-      - name: Translate JSON files
+      - name: Translate JSON
         run: |
-          for f in ./.github/${{ steps.read_version.outputs.version }}-old/**/*.json; do
-            target_dir="$(dirname $f | sed "s|.github/${{ steps.read_version.outputs.version }}-old|${{ steps.read_version.outputs.version }}|")"
-            mkdir -p "./${target_dir}"
-            file_encoding="$(file -b --mime-encoding $f)"
-            if [[ "$file_encoding" == "utf-8" ]]; then
-              opencc -i "$f" -o "./${target_dir}/$(basename $f)" -c s2twp.json
-            else
-              cp "$f" "./${target_dir}/$(basename $f)"
-            fi
-          done
-#wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
+          opencc -i ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json -o ./.github/${{ steps.read_version.outputs.version }}/compendium/%n.json -c s2twp.json
+          opencc -i ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json -o ./.github/${{ steps.read_version.outputs.version }}/npc/%n.json -c s2twp.json
 
       - name: Update version in module.json
-        run: jq --arg ver "${{ steps.read_version.outputs.version }}" '.version=$ver' module.json > ./.github/${{ steps.read_version.outputs.version }}/module.json
+        run: |
+          wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
+          jq --arg ver "${{ steps.read_version.outputs.version }}" '.version=$ver' module.json > ./.github/${{ steps.read_version.outputs.version }}/module.json
 
       - name: Create Artifact
         id: build-zip
