@@ -39,7 +39,7 @@ jobs:
         run: |
           for f in ./.github/${{ steps.read_version.outputs.version }}-old/*.json; do
             if [ -f "$f" ]; then
-              opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f##*/}" -c s2twp.json
+              opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f##*/}" -c s2tw.json
             fi
           done
           wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
