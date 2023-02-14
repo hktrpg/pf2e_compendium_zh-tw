@@ -39,8 +39,12 @@ jobs:
 
       - name: Translate JSON
         run: |
-          opencc -i ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json -o ./.github/${{ steps.read_version.outputs.version }}/compendium/%n.json -c s2twp.json
-          opencc -i ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json -o ./.github/${{ steps.read_version.outputs.version }}/npc/%n.json -c s2twp.json
+          for file in ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json; do
+            opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/compendium/$(basename "${file}")" -c s2tw.json
+          done
+          for file in ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json; do
+            opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
+          done
 
       - name: Update version in module.json
         run: |
