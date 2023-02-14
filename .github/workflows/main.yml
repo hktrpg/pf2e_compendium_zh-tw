@@ -31,16 +31,16 @@ jobs:
       - name: unzip all data
         run: |
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}
+          chmod 777 ./.github/${{ steps.read_version.outputs.version }}
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}-old
           unzip ./.github/pf2e_compendium_chn.zip -d ./.github/${{ steps.read_version.outputs.version }}-old
           rm ./.github/${{ steps.read_version.outputs.version }}-old/babele.js
 
       - name: Translate JSON files
         run: |
-          find ./.github/${{ steps.read_version.outputs.version }}-old -type f -name '*.json' -print0 |
-            while IFS= read -r -d $'\0' f; do
-              opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f#./.github/${{ steps.read_version.outputs.version }}-old/}" -c s2twp.json
-            done
+          for f in ./.github/${{ steps.read_version.outputs.version }}-old/**/*.json; do
+            opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f#./.github/${{ steps.read_version.outputs.version }}-old/}" -c s2twp.json
+          done
           wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
 
       - name: Update version in module.json
