@@ -35,7 +35,7 @@ jobs:
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}
           unzip ./.github/pf2e_compendium_chn.zip -d ./.github/${{ steps.read_version.outputs.version }}
           opencc -i ./.github/${{ steps.read_version.outputs.version }}-old -o ./.github/${{ steps.read_version.outputs.version }} -c s2tw.json
-          wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/babele.js
+          wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
 
       - name: Update version in module.json
         run: jq --arg ver "${{ steps.read_version.outputs.version }}" '.version=$ver' module.json > ./.github/${{ steps.read_version.outputs.version }}/module.json
