@@ -61,7 +61,7 @@ jobs:
 
       - name: Create Artifact
         id: build-zip
-        run: zip -r ./.github/${{ steps.read_version.outputs.version }}/module.zip ./.github/${{ steps.read_version.outputs.version }}/*
+        run: zip -r ./.github/${{ steps.read_version.outputs.version }}/module.zip "./.github/${{ steps.read_version.outputs.version }}/compendium" "./.github/${{ steps.read_version.outputs.version }}/npc" "./.github/${{ steps.read_version.outputs.version }}/compendium" "./.github/${{ steps.read_version.outputs.version }}/"
 
       - name: Update Release with Files
         id: create_version_release
