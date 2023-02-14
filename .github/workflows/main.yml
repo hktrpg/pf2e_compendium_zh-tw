@@ -28,15 +28,18 @@ jobs:
           echo "version=$(jq -r '.version' ./.github/module.json)" >> $GITHUB_OUTPUT
           rm ./.github/module.json
 
-      - name: Convert all data by opencc
+      - name: unzip all data
         run: |
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}-old
           unzip ./.github/pf2e_compendium_chn.zip -d ./.github/${{ steps.read_version.outputs.version }}-old
           rm ./.github/${{ steps.read_version.outputs.version }}-old/babele.js
-           for f in ./.github/${{ steps.read_version.outputs.version }}-old/*.json; do
+
+      - name: Translate JSON files
+        run: |
+          for f in ./.github/${{ steps.read_version.outputs.version }}-old/*.json; do
             if [ -f "$f" ]; then
-              opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f##*/}" -c s2tw.json
+              opencc -i "$f" -o "./.github/${{ steps.read_version.outputs.version }}/${f##*/}" -c s2twp.json
             fi
           done
           wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
