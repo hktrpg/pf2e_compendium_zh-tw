@@ -41,7 +41,7 @@ jobs:
           for f in ./.github/${{ steps.read_version.outputs.version }}-old/**/*.json; do
             target_dir="$(dirname $f | sed "s|.github/${{ steps.read_version.outputs.version }}-old|${{ steps.read_version.outputs.version }}|")"
             mkdir -p "./${target_dir}"
-            opencc -i "$f" -o "./${target_dir}/$(basename $f)" -c s2twp.json
+            opencc -i "$f" -o "./${target_dir}/$(basename $f)" -c s2tw.json
           done
           wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
 
