@@ -1,21 +1,14 @@
-# Foundry VTT PF2e 合集包中文化
-![downloads](https://img.shields.io/github/downloads/fvtt-cn/pf2e_compendium_chn/total)
+# Foundry VTT PF2e 合集包正體中文化
 
-本模组为 FVTT 的 Pathfinder 2e 系统合集包提供了中文翻译。
-**需搭配 [PF2 系统汉化](https://github.com/fvtt-cn/pf2_cn)一同使用以达到完整的汉化效果**。
+![downloads](https://img.shields.io/github/downloads/hktrpg/pf2e_compendium_zh-tw/total)
 
-## 安装
-- [x] 模组管理器中，粘贴清单文件地址： [https://raw.githubusercontent.com/fvtt-cn/pf2e_compendium_chn/main/module.json](https://raw.githubusercontent.com/fvtt-cn/pf2e_compendium_chn/main/module.json)
-- [x] 模组管理器中，搜索 `Translation: 中文 [PF2e（合集包）]`
-- [x] 下载 https://github.com/fvtt-cn/pf2e_compendium_chn/releases/latest/download/pf2e_compendium_chn.zip 并解压至 `modules/pf2e_compendium_chn` 文件夹下
+本模組為 FVTT 的 [PF2e 系統](https://gitlab.com/hooking/foundry-vtt---pathfinder-2e)提供了正體中文翻譯。
+**建議配合 [Foundry VTT PF2e 系統正體中文](https://github.com/hktrpg/pf2_cn_to_zh-tw)一同使用**。
 
-## 加入我们/报告bug
-- QQ 频道： https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&appChannel=share&inviteCode=3cheK&appChannel=share&businessType=9&from=246610&biz=ka
-- Discord 服务器： https://discord.gg/7UrkEg634m
+## 安裝
 
-### 如何参与到翻译中
-本项目使用 [Weblate](https://hosted.weblate.org/) 进行翻译工作，使用 Weblate 无需拥有任何 Git 使用知识，只需在界面上进行中英对照翻译即可！
+- [x] 模組管理器中，搜索 `Translation: 正體中文 [PF2e（合集包）]`
 
-<a href="https://weblate.dickytwister.org/engage/pf2_cn/">
-<img src="https://weblate.dickytwister.org/widgets/pf2_cn/-/open-graph.png" alt="翻译状态" />
-</a>
+## 感謝
+
+- 本Module使用[FVTT-CN](https://github.com/fvtt-cn/pf2e_compendium_chn)資料進行繁簡轉換製作。

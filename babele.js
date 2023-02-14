@@ -1,8 +1,8 @@
 Hooks.once("init", () => {
   if (typeof Babele !== "undefined") {
     Babele.get().register({
-      module: "pf2e_compendium_chn",
-      lang: "cn",
+      module: "pf2e_compendium_zh-tw",
+      lang: "zh-tw",
       dir: "compendium",
     });
 
