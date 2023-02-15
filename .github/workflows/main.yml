@@ -60,7 +60,7 @@ jobs:
       - name: copy icon folder
         run: |
           echo ./.github/${{ steps.read_version.outputs.version }}-old/npc
-          cp ./.github/${{ steps.read_version.outputs.version }}-old/npc/icon/ ./.github/${{ steps.read_version.outputs.version }}/npc/icon/ 
+          cp ./.github/${{ steps.read_version.outputs.version }}-old/npc/icons/ ./.github/${{ steps.read_version.outputs.version }}/npc/icons/ 
 
       - name: Create Artifact
         id: build-zip
