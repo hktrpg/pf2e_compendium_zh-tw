@@ -45,7 +45,7 @@ jobs:
           done
           for file in ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json; do
             if [ "$(basename "${file}")" != "Example.json" ]; then
-              opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
+              echo opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
             else
               cp "${file}" "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")"
             fi
