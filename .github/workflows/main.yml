@@ -58,7 +58,9 @@ jobs:
           jq --arg ver "${{ steps.read_version.outputs.version }}" '.version=$ver' module.json > ./.github/${{ steps.read_version.outputs.version }}/module.json
       
       - name: copy icon folder
-        run: cp ./.github/${{ steps.read_version.outputs.version }}-old/npc/icon/ ./.github/${{ steps.read_version.outputs.version }}/npc/icon/ 
+        run: |
+          echo ./.github/${{ steps.read_version.outputs.version }}-old/npc
+          cp ./.github/${{ steps.read_version.outputs.version }}-old/npc/icon/ ./.github/${{ steps.read_version.outputs.version }}/npc/icon/ 
 
       - name: Create Artifact
         id: build-zip
