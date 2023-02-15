@@ -41,18 +41,14 @@ jobs:
       - name: Translate JSON
         run: |
           for file in ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json; do
-            encoding=$(file -b --mime-encoding "${file}")
-            if [ "${encoding}" != "UTF-8" ]; then
-              cp "${file}" "./.github/${{ steps.read_version.outputs.version }}-tmp/$(basename "${file}")"
-            fi
             opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/compendium/$(basename "${file}")" -c s2tw.json
           done
           for file in ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json; do
-            encoding=$(file -b --mime-encoding "${file}")
-            if [ "${encoding}" != "UTF-8" ]; then
-              cp "${file}" "./.github/${{ steps.read_version.outputs.version }}-tmp/$(basename "${file}")"
+            if [ "$(basename "${file}")" != "Example.json" ]; then
+              opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
+            else
+              cp "${file}" "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")"
             fi
-            opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
           done
 
       - name: Update version in module.json
