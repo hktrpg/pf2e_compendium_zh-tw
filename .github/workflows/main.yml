@@ -43,7 +43,7 @@ jobs:
           for file in ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json; do
             opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/compendium/$(basename "${file}")" -c s2tw.json
           done
-          for file in ./.github/${{ steps.read_version.outputs.version }}-old/npc/*.json; do
+          for file in ./.github/${{ steps.read_version.outputs.version }}-old/npc/*; do
             echo ${file} 
             if [ "$(basename "${file}")" != "Example.json" ]; then
               opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/npc/$(basename "${file}")" -c s2tw.json
