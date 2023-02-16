@@ -2,7 +2,7 @@ name: Update Chinese (Traditional) Translation
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -16,6 +16,13 @@ jobs:
       - name: Install jq and unzip
         run: sudo apt-get install -y jq unzip opencc
 
+      - name: "call action"
+        id: last_release
+        uses: InsonusK/get-latest-release@v1.0.1
+        with:
+          myToken: ${{ github.token }}
+          view_top: 1
+
       - name: Download pf2e_compendium_chn.zip
         run: wget https://github.com/fvtt-cn/pf2e_compendium_chn/releases/latest/download/pf2e_compendium_chn.zip -O ./.github/pf2e_compendium_chn.zip
 
@@ -28,7 +35,13 @@ jobs:
           echo "version=$(jq -r '.version' ./.github/module.json)" >> $GITHUB_OUTPUT
           rm ./.github/module.json
 
+      - name: Print version
+        run: |
+          echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
+          echo ${{ steps.last_release.outputs.tag_name }}
+
       - name: unzip all data
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         run: |
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}
           mkdir -p ./.github/${{ steps.read_version.outputs.version }}/npc
@@ -39,6 +52,7 @@ jobs:
           rm ./.github/${{ steps.read_version.outputs.version }}-old/babele.js
 
       - name: Translate JSON
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         run: |
           for file in ./.github/${{ steps.read_version.outputs.version }}-old/compendium/*.json; do
             opencc -i "${file}" -o "./.github/${{ steps.read_version.outputs.version }}/compendium/$(basename "${file}")" -c s2tw.json
@@ -53,19 +67,23 @@ jobs:
           done
 
       - name: Update version in module.json
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         run: |
           wget https://raw.githubusercontent.com/hktrpg/pf2e_compendium_zh-tw/main/babele.js -O ./.github/${{ steps.read_version.outputs.version }}/babele.js
           jq --arg ver "${{ steps.read_version.outputs.version }}" '.version=$ver' module.json > ./.github/${{ steps.read_version.outputs.version }}/module.json
-
+      
       - name: copy icon folder
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         run: |
-          cp -r ./.github/${{ steps.read_version.outputs.version }}-old/npc/icons/ ./.github/${{ steps.read_version.outputs.version }}/npc/icons/
+          cp -r ./.github/${{ steps.read_version.outputs.version }}-old/npc/icons/ ./.github/${{ steps.read_version.outputs.version }}/npc/icons/ 
 
       - name: Create Artifact
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         id: build-zip
         run: (cd ./.github/${{ steps.read_version.outputs.version}} &&  zip -r module.zip "compendium/" "npc/" .)
 
       - name: Update Release with Files
+        if: ${{ steps.last_release.outputs.tag_name != steps.read_version.outputs.version }}
         id: create_version_release
         uses: ncipollo/release-action@v1
         with:
