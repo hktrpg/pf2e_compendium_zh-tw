@@ -12,4 +12,7 @@
 
 ## 感謝
 
-- 本Module使用[FVTT-CN](https://github.com/fvtt-cn/pf2e_compendium_chn)資料進行繁簡轉換製作。
+- 2023/08/29
+- 本Module使用[AlphaStarguide](https://github.com/AlphaStarguide/pf2e_compendium_chn)
+及
+[FVTT-CN](https://github.com/fvtt-cn/pf2e_compendium_chn)資料進行繁簡轉換製作。

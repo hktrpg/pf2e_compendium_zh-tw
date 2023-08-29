@@ -24,7 +24,7 @@ jobs:
           view_top: 1
 
       - name: Download pf2e_compendium_chn.zip
-        run: wget https://github.com/fvtt-cn/pf2e_compendium_chn/releases/latest/download/pf2e_compendium_chn.zip -O ./.github/pf2e_compendium_chn.zip
+        run: wget https://github.com/AlphaStarguide/pf2e_compendium_chn/releases/latest/download/pf2e_compendium_chn.zip -O ./.github/pf2e_compendium_chn.zip
 
       - name: Unzip module.json from pf2e_compendium_chn.zip
         run: unzip -p ./.github/pf2e_compendium_chn.zip 'module.json' >./.github/module.json
