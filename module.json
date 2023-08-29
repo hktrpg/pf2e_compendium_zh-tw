@@ -1,6 +1,6 @@
 {
   "title": "Translation: 正體中文 [PF2e（合集包）]",
-  "description": "PF2e 系統的合集包翻譯，需要 Babele。",
+  "description": "PF2e 系統的合集包翻譯，需要 Babele，根據Fvtt-cn及AlphaStarguide版本進行繁簡轉換。",
   "authors": [
     {
       "name": "HKTRPG",
@@ -8,8 +8,8 @@
     }
   ],
   "compatibility": {
-    "minimum": "10",
-    "verified": "10"
+    "minimum": "11",
+    "verified": "11"
   },
   "scripts": [
     "npc/NPCTranslator.js"
