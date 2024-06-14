@@ -11,11 +11,8 @@
     "minimum": "11",
     "verified": "11"
   },
-  "scripts": [
-    "npc/NPCTranslator.js"
-  ],
   "esmodules": [
-    "babele.js"
+    "babele.js","npc/NPCTranslator.js"
   ],
   "version": "Auto replaced",
   "url": "https://github.com/hktrpg/pf2e_compendium_zh-tw",
