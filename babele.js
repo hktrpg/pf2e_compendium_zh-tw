@@ -1,12 +1,12 @@
-Hooks.once("init", () => {
+Hooks.once('babele.init', (babele) => {
     if (typeof Babele !== "undefined") {
-        game.babele.register({
+        babele.register({
             module: "pf2e_compendium_zh-tw",
             lang: "zh-tw",
             dir: "compendium",
         });
 
-        game.babele.registerConverters(({
+        babele.registerConverters({
             "npc-portrait-path": (data, translations, dataObject, translatedCompendium, translationObject) => {
                 return game.npcTrans.portrait(data, translations, dataObject, translatedCompendium, translationObject);
             },
@@ -19,6 +19,6 @@ Hooks.once("init", () => {
             "npc-item-translation": (data, translations, dataObject, translatedCompendium, translationObject) => {
                 return game.npcTrans.item(data, translations, dataObject, translatedCompendium, translationObject);
             },
-        }));
+        });
     }
 });
